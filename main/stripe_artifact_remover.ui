@@ -17,6 +17,12 @@
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
      <widget class="QFrame" name="frame">
+      <property name="minimumSize">
+       <size>
+        <width>180</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="maximumSize">
        <size>
         <width>180</width>
@@ -31,7 +37,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="loadPushButton">
          <property name="text">
           <string>Load Dicom</string>
          </property>
@@ -47,7 +53,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox">
+          <widget class="QSpinBox" name="directionSpinBox">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -56,7 +62,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -65,7 +71,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox">
+          <widget class="QDoubleSpinBox" name="sigmaSpinBox">
            <property name="value">
             <double>3.000000000000000</double>
            </property>
@@ -83,7 +89,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+          <widget class="QDoubleSpinBox" name="frequencySpinBox">
            <property name="minimum">
             <double>0.000000000000000</double>
            </property>
@@ -95,6 +101,13 @@
         </layout>
        </item>
        <item>
+        <widget class="QPushButton" name="filterPushButton">
+         <property name="text">
+          <string>Filter</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -102,7 +115,7 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>372</height>
+           <height>337</height>
           </size>
          </property>
         </spacer>
@@ -111,10 +124,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QVTKWidget" name="qvtkWidget"/>
+     <widget class="QVTKWidget" name="originalQvtkWidget"/>
     </item>
     <item>
-     <widget class="QVTKWidget" name="qvtkWidget_2"/>
+     <widget class="QVTKWidget" name="filteredQvtkWidget"/>
     </item>
    </layout>
   </widget>
