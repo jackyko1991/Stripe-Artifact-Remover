@@ -55,7 +55,7 @@
          <item>
           <widget class="QSpinBox" name="directionSpinBox">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -124,10 +124,18 @@
      </widget>
     </item>
     <item>
-     <widget class="QVTKWidget" name="originalQvtkWidget"/>
+     <widget class="QVTKWidget" name="originalQvtkWidget" native="true">
+      <property name="focusPolicy">
+       <enum>Qt::WheelFocus</enum>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QVTKWidget" name="filteredQvtkWidget"/>
+     <widget class="QVTKWidget" name="filteredQvtkWidget" native="true">
+      <property name="focusPolicy">
+       <enum>Qt::WheelFocus</enum>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -137,7 +145,7 @@
      <x>0</x>
      <y>0</y>
      <width>1354</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

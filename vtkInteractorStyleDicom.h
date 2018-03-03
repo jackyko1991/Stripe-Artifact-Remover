@@ -5,6 +5,17 @@
 #include "vtkInteractorStyleImage.h"
 #include "vtkImageViewer2.h"
 #include <vtkRenderWindowInteractor.h>
+#include <vtkTextMapper.h>
+
+// helper class to format slice status message
+class StatusMessage {
+public:
+	static std::string Format(int slice, int maxSlice) {
+		std::stringstream tmp;
+		tmp << "Slice:  " << slice + 1 << "/" << maxSlice + 1;
+		return tmp.str();
+	}
+};
 
 class vtkInteractorStyleDicom : public vtkInteractorStyleImage
 {
@@ -14,44 +25,57 @@ public:
  
 protected:
    vtkImageViewer2* _ImageViewer;
-   //vtkTextMapper* _StatusMapper;
+   vtkTextMapper* _StatusMapper;
    int _Slice;
    int _MinSlice;
    int _MaxSlice;
  
 public:
    void SetImageViewer(vtkImageViewer2* imageViewer) {
-      _ImageViewer = imageViewer;
+	  _ImageViewer = imageViewer;
       _MinSlice = imageViewer->GetSliceMin();
       _MaxSlice = imageViewer->GetSliceMax();
       _Slice = _MinSlice;
       cout << "Slicer: Min = " << _MinSlice << ", Max = " << _MaxSlice << std::endl;
    }
+
+   void UpdateSliceInfo() {
+
+	   std::cout << "update slice info with viewer " << _ImageViewer <<std::endl;
+	   _MinSlice = _ImageViewer->GetSliceMin();
+	   _MaxSlice = _ImageViewer->GetSliceMax();
+	   _Slice = _MinSlice;
+	   cout << "Slicer: Min = " << _MinSlice << ", Max = " << _MaxSlice << std::endl;
+   }
  
-   //void SetStatusMapper(vtkTextMapper* statusMapper) {
-   //   _StatusMapper = statusMapper;
-   //}
+   void SetStatusMapper(vtkTextMapper* statusMapper) {
+      _StatusMapper = statusMapper;
+   }
  
  
 protected:
+
    void MoveSliceForward() {
+	   std::cout << _MinSlice << "/" << _Slice << "/" << _MaxSlice << std::endl;
       if(_Slice < _MaxSlice) {
          _Slice += 1;
          cout << "MoveSliceForward::Slice = " << _Slice << std::endl;
          _ImageViewer->SetSlice(_Slice);
-         //std::string msg = StatusMessage::Format(_Slice, _MaxSlice);
-         //_StatusMapper->SetInput(msg.c_str());
+         std::string msg = StatusMessage::Format(_Slice, _MaxSlice);
+         _StatusMapper->SetInput(msg.c_str());
          _ImageViewer->Render();
       }
    }
  
    void MoveSliceBackward() {
+	   std::cout << _MinSlice << "/" << _Slice << "/" << _MaxSlice << std::endl;
+
       if(_Slice > _MinSlice) {
          _Slice -= 1;
          cout << "MoveSliceBackward::Slice = " << _Slice << std::endl;
          _ImageViewer->SetSlice(_Slice);
-         //std::string msg = StatusMessage::Format(_Slice, _MaxSlice);
-         //_StatusMapper->SetInput(msg.c_str());
+         std::string msg = StatusMessage::Format(_Slice, _MaxSlice);
+         _StatusMapper->SetInput(msg.c_str());
          _ImageViewer->Render();
       }
    }
